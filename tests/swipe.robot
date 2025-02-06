@@ -1,51 +1,52 @@
-***Settings***
+*** Settings ***
 
-Resource            ../resources/base.robot
+Resource            ../resources/base.robot  # Importa recursos e keywords do arquivo base.robot
 
-Test Setup          Open Session
-Test Teardown       Close Session
+# Executa a Keyword 'Open Session' antes de cada caso de teste para iniciar a sessão do aplicativo
+Test Setup          Open Session  
 
-# start_x - x-percent at which to start
-# start_y - y-percent at which to start
-# end_x - x-percent distance from start_x at which to stop
-# end_y - y-percent distance from start_y at which to stop
-# duration - (optional) time to take the swipe, in ms.
+# Executa a Keyword 'Close Session' depois de cada caso de teste para encerrar a sessão do aplicativo
+Test Teardown       Close Session  
 
-***Variables***
-${BTN_REMOVE}=      id=io.qaninja.android.twp:id/btnRemove
+# Explicação dos parâmetros de Swipe By Percent:
+# start_x - Posição inicial no eixo X (percentual da largura da tela)
+# start_y - Posição inicial no eixo Y (percentual da altura da tela)
+# end_x - Posição final no eixo X (percentual da largura da tela)
+# end_y - Posição final no eixo Y (percentual da altura da tela)
+# duration - (opcional) Tempo do movimento de swipe em milissegundos
 
-***Test Cases***
-Deve remover o Capitão América
-    [tags]  removeAvenger
-    Go To Avenger List
-    # Start Swipe
-    # Tela de 1080 x 1920px = X 1010x sobre 1080px equivale a = 93.5%  => Horizontal
-    # Tela de 1080 x 1920px = Y 350px sobre 1920px equivale a = 18.2%  => Vertical
+*** Variables ***
+${BTN_REMOVE}=      id=io.qaninja.android.twp:id/btnRemove  # Identificador do botão de remoção do item
 
-    # End Swipe
-    # Tela de 1080 x 1920px = X 470px sobre 1080px equivale a = 43.5%  => Horizontal
-    # Tela de 1080 x 1920px = Y 350px sobre 1920px equivale a = 18.2%  => Vertical
+*** Test Cases ***
+Deve remover o Capitão América  # Teste para remover o personagem Capitão América da lista
+    [tags]  removeAvenger  
+    Go To Avenger List  # Navega até a lista de Vingadores
 
-    Swipe By Percent    93.5    18.2    43.5    18.2
-    Wait Until Element Is Visible           ${BTN_REMOVE}
-    Click Element                           ${BTN_REMOVE}
-    Wait Until Page Does Not Contain        Capitão América
-    Sleep                           5
+    # Realiza um swipe da direita para a esquerda para exibir o botão de remover
+    # Baseado em uma tela de 1080x1920 pixels
+    # Começa no ponto (93.5%, 18.2%) e termina no ponto (43.5%, 18.2%)
+    Swipe By Percent    93.5    18.2    43.5    18.2  
 
-Deve mover o Hulk para o topo da lista
-    [tags]  moveHulkToTopList
-    Go To Avenger List
-    # Start Swipe
-    # Tela de 1080 x 1920px = X 70px sobre 1080px equivale a = 6.5%  => Horizontal
-    # Tela de 1080 x 1920px = Y 1210px sobre 1920px equivale a = 63.0%  => Vertical
+    Wait Until Element Is Visible    ${BTN_REMOVE}  # Aguarda até que o botão de remover esteja visível
+    Click Element                    ${BTN_REMOVE}  # Clica no botão de remover
+    Wait Until Page Does Not Contain  Capitão América  # Aguarda até que o nome "Capitão América" desapareça da lista
+    Sleep    5  # Aguarda 5 segundos antes de encerrar o teste (boa prática: evitar sleep e usar waits)
 
-    # End Swipe
-    # Tela de 1080 x 1920px = X 70px sobre 1080px equivale a = 6.5%  => Horizontal
-    # Tela de 1080 x 1920px = Y 300px sobre 1920px equivale a = 15.6%  => Vertical
-    Swipe By Percent    6.5    63.0    6.5    15.6
-    Text Should Be Visible    Hulk
-    Text Should Be Visible    Capitão América
-    Text Should Be Visible    Thor
-    Text Should Be Visible    Homem de Ferro
-    Text Should Be Visible    Homem Aranha
-    Sleep               5
+Deve mover o Hulk para o topo da lista  # Teste para mover o personagem Hulk para o topo da lista
+    [tags]  moveHulkToTopList  
+    Go To Avenger List  # Navega até a lista de Vingadores
+
+    # Realiza um swipe de baixo para cima para mover o Hulk para o topo da lista
+    # Baseado em uma tela de 1080x1920 pixels
+    # Começa no ponto (6.5%, 63.0%) e termina no ponto (6.5%, 15.6%)
+    Swipe By Percent    6.5    63.0    6.5    15.6  
+
+    # Verifica se os personagens ainda estão visíveis na lista
+    Text Should Be Visible    Hulk  
+    Text Should Be Visible    Capitão América  
+    Text Should Be Visible    Thor  
+    Text Should Be Visible    Homem de Ferro  
+    Text Should Be Visible    Homem Aranha  
+
+    Sleep    5  # Aguarda 5 segundos antes de encerrar o teste

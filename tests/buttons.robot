@@ -1,5 +1,4 @@
 ***Settings***
-
 Resource        ../resources/base.robot
 
 Test Setup      Open Session

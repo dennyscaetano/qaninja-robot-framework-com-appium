@@ -1,5 +1,19 @@
-Repositório com objetivo de exercitar o aprendizado das vídeo aulas da do curso da QAninja com Fernando Papito na plataforma https://app.nutror.com/
+# 🏆 Testes Automatizados com Appium e Robot Framework
 
-Executar todos os casos de teste: '''robot -d .logs tests\'''
-Executar somente o caso de teste com a tag moveHulkToTopList: '''robot -d .logs -i moveHulkToTopList tests\swipe.robot'''
-Executar somente os testes da suite swipe.robot: '''robot -d .logs tests\swipe.robot'''
+Este repositório tem como objetivo exercitar o aprendizado das vídeo aulas do curso **"Introdução ao Appium com Robot Framework para Android Apps"** da **QAninja** com **Fernando Papito**, disponível na plataforma [Nutror](https://app.nutror.com/).  
+
+## 🚀 Como Executar os Testes  
+
+Antes de rodar os testes, certifique-se de que todas as dependências estão corretamente instaladas e o ambiente está configurado.  
+
+### 🔹 Executar todos os casos de teste  
+```sh
+robot -d .logs tests\
+📌 Tecnologias Utilizadas
+🏗 Appium
+🤖 Robot Framework
+🐍 Python
+📢 Contribuição
+Caso queira contribuir, fique à vontade para abrir um pull request ou relatar issues!
+
+📩 Vamos nos conectar no LinkedIn! Dennys Matos
